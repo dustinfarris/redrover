@@ -1,8 +1,7 @@
 RedRover
 ========
 
-.. image:: https://travis-ci.org/dustinfarris/redrover.png?branch=master
-   :target: http://travis-ci.org/dustinfarris/redrover
+[![Build Status](https://travis-ci.org/dustinfarris/redrover.png?branch=master)](https://travis-ci.org/dustinfarris/redrover)
 
 RedRover is a testing utility suite for Django.  It wraps other powerful
 tools such as Nose and Selinium into an easy to use and read syntax.
@@ -43,7 +42,10 @@ No big changes here:
 
     python manage.py test
 
-Since RedRover wraps `django_nose<https://github.com/nose-devs/nose>`_,
-you get all of its testing options as well.  See their
-`documentation<https://nose.readthedocs.org/en/latest/>`_ for details,
+Since RedRover wraps [django_nose][django_nose], you get all of its
+testing options as well.  See their [documentation][2]  for details,
 or just run ``python manage.py help test``.
+
+
+[1]: https://github.com/nose-devs/nose
+[2]: https://nose.readthedocs.org/en/latest/
