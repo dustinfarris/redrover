@@ -46,6 +46,29 @@ Since RedRover wraps [nose][1] (via django_nose), you get all of its
 testing options as well.  See their [documentation][2]  for details, or
 just run ``python manage.py help test``.
 
+Writing Tests
+-------------
+The idea of writing RedRover tests is to identify a particular "thing"
+and describe how it should behave.  Every thing gets a class where it
+becomes the 'subject,' and every class has one or more tests that
+evaluate the subject's behavior by referring to "it."
+
+In the simplest form, suppose we want to test whether the number 5 can
+be attained by adding the numbers 2 and 3.  Our test would look like
+this:
+
+    from redrover import *
+
+
+    class NumberFiveTest(RedRoverTest):
+
+      subject = 5
+
+      def test_addition(self):
+        it.should(equal, 2 + 3)
+
+Running ``./manage.py test`` should result in some nice looking output
+that informs you all tests have passed.
 
 [1]: https://github.com/nose-devs/nose
 [2]: https://nose.readthedocs.org/en/latest/
