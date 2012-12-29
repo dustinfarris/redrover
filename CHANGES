@@ -1,3 +1,13 @@
+Version 0.2.0
+-------------
+
+* Remove unneeded files
+* Linting test files
+* Add `pip install ipdb` to `make develop`
+* Add 'easy_install readline` to `make develop`
+* More unit tests
+* Updated setup.py doc
+
 Version 0.1.0
 -------------
 

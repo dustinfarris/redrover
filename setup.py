@@ -6,10 +6,9 @@ RedRover
 RedRover is a testing utility suite for Django.  It wraps other powerful
 tools such as Nose and Selinium into an easy to use and read syntax.
 
-The goal of RedRover is not to facilitate Behavior Driven Development --
-a task being very well handled by other projects such as Cucumber -- but
-rather to give Test Driven Development another layer of abstraction
-delivering a more robust TDD environment that is more flexible than BDD.
+At its core, RedRover borrows from other python projects and provides
+an interface with custom syntax sugar inspired by the RSpec and Capybara
+projects that are used widely with Ruby on Rails.
 
 :copyright: (c) 2012 by Dustin Farris
 :license: BSD, see LICENSE for more details.
@@ -41,7 +40,7 @@ install_requires = [
 
 setup(
   name='redrover',
-  version='0.1.0',
+  version='0.2.0',
   author='Dustin Farris',
   author_email='dustin@dustinfarris.com',
   url='https://github.com/dustinfarris/redrover',
