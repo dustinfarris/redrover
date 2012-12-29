@@ -4,15 +4,12 @@ from django.test import TestCase
 
 
 def do_decorate(attr, value):
+  protected = [
+    'setUp', 'setUpClass', 'tearDown', 'tearDownClass',
+    'run', 'skipTest', 'debug']
   return (
     '__' not in attr and
-    'setUp' is not attr and
-    'setUpClass' is not attr and
-    'tearDown' is not attr and
-    'tearDownClass' is not attr and
-    'run' is not attr and
-    'skipTest' is not attr and
-    'debug' is not attr and
+    attr not in protected and
     isinstance(value, FunctionType))
 
 
