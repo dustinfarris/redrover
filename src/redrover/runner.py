@@ -5,13 +5,16 @@ from django.core import exceptions
 from django.utils.importlib import import_module
 from django_nose.plugin import DjangoSetUpPlugin, ResultPlugin, TestReorderer
 from django_nose.runner import NoseTestSuiteRunner
+
 import nose.core
+
+from plugin import RedRoverFilter
 
 
 def _get_plugins_from_settings():
   plugins = (list(getattr(settings, 'NOSE_PLUGINS', [])) +
              ['django_nose.plugin.TestReorderer',
-              'redrover.plugin.MyError'])
+              'redrover.plugin.RedRoverFilter'])
 
   for plug_path in plugins:
     try:
@@ -40,15 +43,16 @@ def _get_plugins_from_settings():
 class RedRoverRunner(NoseTestSuiteRunner):
 
   def __init__(self, *args, **kwargs):
-    if 'NOSE_REDNOSE' not in os.environ:
-      os.environ['NOSE_REDNOSE'] = '1'
-    super(RedRoverRunner, self).__init__(*args, **kwargs)  
+      if 'NOSE_REDROVER' not in os.environ:
+        os.environ['NOSE_REDROVER'] = '1'
+      super(RedRoverRunner, self).__init__(*args, **kwargs)
 
   def run_suite(self, nose_argv):
     result_plugin = ResultPlugin()
     plugins_to_add = [DjangoSetUpPlugin(self),
                       result_plugin,
-                      TestReorderer()]
+                      TestReorderer(),
+                      RedRoverFilter()]
 
     for plugin in _get_plugins_from_settings():
         plugins_to_add.append(plugin)

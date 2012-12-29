@@ -3,8 +3,6 @@ from types import FunctionType
 
 from django.test import TestCase
 
-from plugin import My
-
 
 logger = logging.getLogger(__name__)
 
@@ -27,8 +25,6 @@ def decorate_all():
   class DecorateAll(type):
 
     def __new__(cls, name, bases, dct):
-      # This allows us to supress the `self` argument in tests
-
       for attr, value in dct.iteritems():
         if do_decorate(attr, value):
           value.__name__ = 'test_%s' % value.__name__
@@ -73,7 +69,7 @@ class Subject(object):
   def should(self, cls, *args, **kwargs):
     klass = cls(self.get_subject, *args, **kwargs)
     if not klass.process():
-      raise My(klass.__unicode__().capitalize())
+      raise AssertionError(klass.__unicode__().capitalize())
     return True
 
   def should_not(self):
@@ -87,5 +83,6 @@ class Subject(object):
 class RedRover(TestCase):
 
   __metaclass__ = decorate_all()
+
 
 equal = Equal

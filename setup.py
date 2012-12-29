@@ -13,6 +13,7 @@ delivering a more robust TDD environment that is more flexible than BDD.
 
 :copyright: (c) 2012 by Dustin Farris
 :license: BSD, see LICENSE for more details.
+
 """
 
 from setuptools import setup, find_packages
@@ -31,9 +32,9 @@ for m in ('multiprocessing', 'billiard'):
 tests_require = ['pytest']
 
 install_requires = [
-  'Django>=1.3',
+  'Django>=1.4',
   'django_nose',
-  'rednose',
+  'rednose==0.3.3',
   'splinter']
 
 setup(
@@ -51,4 +52,10 @@ setup(
   tests_require=tests_require,
   test_suite='runtests.runtests',
   license='BSD',
-  include_package_data=True)  
+  include_package_data=True,
+  classifiers=[
+    'Framework :: Django',
+    'Intended Audience :: Developers',
+    'Intended Audience :: System Administrators',
+    'Operating System :: OS Independent',
+    'Topic :: Software Development'])  
