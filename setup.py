@@ -28,7 +28,7 @@ for m in ('multiprocessing', 'billiard'):
         __import__(m)
     except ImportError:
         pass
-        
+
 tests_require = [
   'pytest',
   'pytest-django']
@@ -41,10 +41,10 @@ install_requires = [
 
 setup(
   name='redrover',
-  version='0.0.0',
+  version='0.1.0',
   author='Dustin Farris',
   author_email='dustin@dustinfarris.com',
-  url='http://dustinfarris.com/redrover/',
+  url='https://github.com/dustinfarris/redrover',
   description='A testing utility suite for Django.',
   long_description=__doc__,
   package_dir={'': 'src'},
@@ -60,4 +60,4 @@ setup(
     'Intended Audience :: Developers',
     'Intended Audience :: System Administrators',
     'Operating System :: OS Independent',
-    'Topic :: Software Development'])  
+    'Topic :: Software Development'])
