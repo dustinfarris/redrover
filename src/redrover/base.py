@@ -59,6 +59,6 @@ class Subject(object):
     return self.subject
 
 
-class RedRover(TestCase):
+class RedRoverTest(TestCase):
 
   __metaclass__ = decorate_all()
