@@ -29,7 +29,9 @@ for m in ('multiprocessing', 'billiard'):
     except ImportError:
         pass
         
-tests_require = ['pytest']
+tests_require = [
+  'pytest',
+  'pytest-django']
 
 install_requires = [
   'Django>=1.4',
