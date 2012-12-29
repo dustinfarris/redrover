@@ -7,3 +7,4 @@
 pip-log.txt
 /build
 /dist
+/env
