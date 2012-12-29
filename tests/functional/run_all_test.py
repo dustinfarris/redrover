@@ -19,3 +19,5 @@ class RunAllTest(TestCase):
   def test_output(self):
     """Tests should run and return proper output to stdout/stderr."""
     self.assertIn("1 test passed", self.err)
+    self.assertNotIn("failed", self.err)
+    self.assertNotIn("error", self.err)
