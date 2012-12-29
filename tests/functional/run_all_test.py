@@ -1,5 +1,6 @@
 import os
-import shlex, subprocess
+import shlex
+import subprocess
 
 from django.test import TestCase
 
