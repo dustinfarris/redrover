@@ -42,9 +42,9 @@ No big changes here:
 
     python manage.py test
 
-Since RedRover wraps [django_nose][1], you get all of its
-testing options as well.  See their [documentation][2]  for details,
-or just run ``python manage.py help test``.
+Since RedRover wraps [nose][1] (via django_nose), you get all of its
+testing options as well.  See their [documentation][2]  for details, or
+just run ``python manage.py help test``.
 
 
 [1]: https://github.com/nose-devs/nose
