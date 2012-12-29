@@ -1,8 +1,13 @@
 from django.conf import settings
 import os
+import sys
 
 
 def pytest_configure(config):
+  os.environ['EXAMPLE_DIR'] = example_dir = os.path.normpath(
+    os.path.join(os.path.dirname(__file__), 'example'))
+  if example_dir not in sys.path:
+    sys.path.insert(0, example_dir)
   if not settings.configured:
     os.environ['DJANGO_SETTINGS_MODULE'] = 'example.settings'
 

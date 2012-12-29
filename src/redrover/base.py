@@ -43,13 +43,16 @@ class Subject(object):
     self.subject = subject
 
   def should(self, cls, *args, **kwargs):
-    klass = cls(self.get_subject, *args, **kwargs)
-    if not klass.process():
-      raise AssertionError(klass.__unicode__().capitalize())
+    assertion = cls(self.get_subject, *args, **kwargs)
+    if not assertion.passes:
+      raise AssertionError(assertion.message)
     return True
 
-  def should_not(self):
-    return
+  def should_not(self, cls, *args, **kwargs):
+    assertion = cls(self.get_subject, *args, **kwargs)
+    if assertion.passes:
+      raise AssertionError(assertion.message)
+    return True
 
   @property
   def get_subject(self):

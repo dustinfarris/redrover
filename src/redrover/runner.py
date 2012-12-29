@@ -43,9 +43,9 @@ def _get_plugins_from_settings():
 class RedRoverRunner(NoseTestSuiteRunner):
 
   def __init__(self, *args, **kwargs):
-      if 'NOSE_REDROVER' not in os.environ:
-        os.environ['NOSE_REDROVER'] = '1'
-      super(RedRoverRunner, self).__init__(*args, **kwargs)
+    if 'NOSE_REDROVER' not in os.environ:
+      os.environ['NOSE_REDROVER'] = '1'
+    super(RedRoverRunner, self).__init__(*args, **kwargs)
 
   def run_suite(self, nose_argv):
     result_plugin = ResultPlugin()
