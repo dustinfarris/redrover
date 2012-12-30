@@ -117,7 +117,7 @@ class Person(models.Model):
 
   @property
   def full_name(self):
-    return '%s %s' %
+    return '%s %s' % (self.first_name, self.last_name)
 
 ```
 
