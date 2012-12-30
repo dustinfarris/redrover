@@ -33,8 +33,7 @@ for m in ('multiprocessing', 'billiard'):
 
 tests_require = [
   'pytest',
-  'pytest-django',
-  'factory_boy']
+  'pytest-django']
 
 install_requires = [
   'Django>=1.4',

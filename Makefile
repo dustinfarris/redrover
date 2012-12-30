@@ -1,10 +1,11 @@
-VERSION = 0.2
+VERSION = 0.3
 
 test: lint test-python
 
 develop:
 	pip install "flake8>=1.7" --use-mirrors
 	pip install ipdb --use-mirrors
+	pip install factory_boy
 	easy_install readline
 	pip install -e . --use-mirrors
 
