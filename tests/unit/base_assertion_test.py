@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from redrover.case import BaseAssertion
+from redrover.assertions.base import BaseAssertion
 
 
 class BaseAssertionTest(TestCase):

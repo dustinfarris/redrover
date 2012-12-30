@@ -18,42 +18,21 @@ def decorate_all():
   class DecorateAll(type):
 
     def __new__(cls, name, bases, dct):
+      subject = dct.get('subject')
+      if subject:
+        if subject in dct:
+          raise NameError(
+            'You cannot use "%s" as a subject name.' % subject)
+        dct[subject] = None
+
       for attr, value in dct.iteritems():
         if do_decorate(attr, value):
-          value.__name__ = 'test_%s' % value.__name__
-          value.__globals__.update({
-            'it': Subject(dct['subject'])})
+          if isinstance(value, FunctionType):
+            value.__name__ = 'test_%s' % value.__name__
       return super(DecorateAll, cls).__new__(
         cls, name, bases, dct)
 
-    def __setattr__(self, attr, value):
-      if do_decorate(attr, value):
-        value.__name__ = 'test_%s' % value.__name__
-      super(DecorateAll, self).__setattr__(attr, value)
-
   return DecorateAll
-
-
-class Subject(object):
-
-  def __init__(self, subject):
-    self.subject = subject
-
-  def should(self, cls, *args, **kwargs):
-    assertion = cls(self.get_subject, *args, **kwargs)
-    if not assertion.passes:
-      raise AssertionError(assertion.message)
-    return True
-
-  def should_not(self, cls, *args, **kwargs):
-    assertion = cls(self.get_subject, *args, **kwargs)
-    if assertion.passes:
-      raise AssertionError(assertion.message)
-    return True
-
-  @property
-  def get_subject(self):
-    return self.subject
 
 
 class RedRoverTest(TestCase):

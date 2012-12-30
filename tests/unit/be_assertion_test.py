@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from redrover.case import BeAssertion
+from redrover.assertions import BeAssertion
 
 
 class BeAssertionTest(TestCase):
@@ -17,8 +17,8 @@ class BeAssertionTest(TestCase):
 
   def test_pass_message(self):
     assertion = BeAssertion(1, 1)
-    self.assertEqual('Int 1 is 1', assertion.message)
+    self.assertEqual('1 is 1', assertion.message)
 
   def test_fail_message(self):
     assertion = BeAssertion(1, True)
-    self.assertEqual('Int 1 is not True', assertion.message)
+    self.assertEqual('1 is not True', assertion.message)

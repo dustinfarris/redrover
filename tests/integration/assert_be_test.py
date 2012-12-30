@@ -1,14 +1,15 @@
 from django.test import TestCase
 
 from redrover import be
-from redrover.base import Subject
+from redrover.subject import _subject
 
 
 class AssertBeTest(TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls.subject = Subject(1)
+    subject = _subject()
+    cls.subject = subject(1)
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(be, 1))

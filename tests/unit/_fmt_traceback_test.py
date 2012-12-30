@@ -13,12 +13,12 @@ class FmtTracebackTest(TestCase):
   def test_format_remove(self):
     """It should remove any instance of 'redrover/case.py'."""
     try:
-      assert 'redrover/base.py' in '***'
+      assert 'redrover/subject.py' in '***'
     except:
       pass
     tb = sys.exc_info()[2]
     formatted_traceback = self.red_rover_filter._fmt_traceback(tb)
-    self.assertNotIn('redrover/base.py', formatted_traceback)
+    self.assertNotIn('redrover/subject.py', formatted_traceback)
 
   def test_format_preserve(self):
     """It should keep everything else."""

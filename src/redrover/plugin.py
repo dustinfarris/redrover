@@ -59,7 +59,7 @@ class RedRoverFilter(RedNose):
     current_trace = trace
     while current_trace is not None:
       line = self._file_line(current_trace)
-      if line is not None and 'redrover/base.py' not in line:
+      if line is not None and 'redrover/subject.py' not in line:
         ret.append(line)
       current_trace = current_trace.tb_next
     return '\n'.join(ret)

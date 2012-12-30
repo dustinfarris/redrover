@@ -1,14 +1,15 @@
 from django.test import TestCase
 
 from redrover import equal
-from redrover.base import Subject
+from redrover.subject import _subject
 
 
 class AssertEqualTest(TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls.subject = Subject(2)
+    subject = _subject()
+    cls.subject = subject(2)
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(equal, 1 + 1))
