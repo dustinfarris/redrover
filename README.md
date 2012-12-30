@@ -23,7 +23,8 @@ Installation
 ------------
 Install via pip.
 
-    pip install redrover
+    :::sh
+    $ pip install redrover
 
 Dependencies
 ------------
@@ -76,6 +77,11 @@ attained by adding the numbers 2 and 3.  Our test would look like this:
 
 Running ``./manage.py test`` should result in some nice looking output
 that informs you all tests have passed.
+
+You are not completely restricted to writing tests in this way.  The
+standard unittest library and assertions work as good as ever; and
+they may be preferable in some cases.  Where RedRover really shines
+is in behavior-driven developement.
 
 [1]: https://github.com/dnerdy/factory_boy
 [2]: https://github.com/nose-devs/nose
