@@ -3,6 +3,9 @@
 RedRover
 ========
 
+UNDER DEVELOPMENT - RedRover is not ready for production use and is
+made available for the curious only.
+
 RedRover is a testing utility suite for Django.  It wraps other powerful
 tools such as Nose and Selinium into an easy to use and read syntax.
 

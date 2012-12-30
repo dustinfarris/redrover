@@ -1,6 +1,9 @@
 RedRover
 ========
 
+UNDER DEVELOPMENT - RedRover is not ready for production use and is
+made available for the curious only.
+
 [![Build Status](https://travis-ci.org/dustinfarris/redrover.png?branch=master)](https://travis-ci.org/dustinfarris/redrover)
 
 RedRover is a testing utility suite for Django.  It wraps other powerful
