@@ -61,9 +61,8 @@ and describe how it should behave.  Every thing gets a class where it
 becomes the 'subject,' and every class has one or more tests that
 evaluate the subject's behavior by referring to "it."
 
-In the simplest form, suppose we want to test whether the number 5 can
-be attained by adding the numbers 2 and 3.  Our test would look like
-this:
+In the simplest form, suppose we want to show that the number 5 can be
+attained by adding the numbers 2 and 3.  Our test would look like this:
 
     from redrover import *
 
