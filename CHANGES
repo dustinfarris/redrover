@@ -1,9 +1,23 @@
+Version 0.5.0
+-------------
+
+* Added RespondToAssertion
+* Added BeValidAssertion
+* Created `describe` decorator to provide test context
+* Made the Subject class dynamic depending on how it is referred to
+* Added additional integration tests to example
+* Test fixes
+* Move assertions to their own module
+* Documentation updates
+
+
 Version 0.3.1
 -------------
 
 * Code enhancements
 * More documentation
 * "Under Development" disclaimer note
+
 
 Version 0.3.0
 -------------
@@ -12,6 +26,7 @@ Version 0.3.0
 * Filled out README documentation
 * Added "be" assertion
 * Minor fixes
+
 
 Version 0.2.0
 -------------
@@ -22,6 +37,7 @@ Version 0.2.0
 * Add 'easy_install readline` to `make develop`
 * More unit tests
 * Updated setup.py doc
+
 
 Version 0.1.0
 -------------
