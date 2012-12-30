@@ -67,23 +67,95 @@ and describe how it should behave.  Every thing gets a class where it
 becomes the 'subject,' and every class has one or more tests that
 evaluate the subject's behavior by referring to "it."
 
-In the simplest form, suppose we want to show that the number 5 can be
-attained by adding the numbers 2 and 3.  Our test would look like this:
+To accomplish this, we declare a subject in the class description, and
+further define it in the setUp method.
+
+Model Tests
+-----------
+
+Suppose we decide to describe the behavior of a "Person" Django model.
+One of the qualities of Person might be that it has a first_name, or in
+other words, that it responds to a first_name attribute inquiry.  Here
+is what this sort of "behavior-driven" test might look like when using
+RedRover:
 
 ```python
 from redrover import *
 
+from people.models import Person
 
-class NumberFiveTest(RedRoverTest):
 
-  subject = 5
+class PersonTest(RedRoverTest):
 
-  def test_addition(self):
-    it.should(equal, 2 + 3)
+  subject = 'person'
+
+  def setUp(self):
+    self.person = Person()
+
+  @describe
+  def attributes(self):
+    it.should(respond_to, 'first_name')
+
 ```
 
 Running ``./manage.py test`` should result in some nice looking output
 that informs you all tests have passed.
+
+Now let's take it a step further.  Suppose you want to ensure that your
+model instance properly validates when populated with correct
+information -- and moreso, that it *doesn't* validate when populated
+with incorrect information.   Assume the model Person looks something
+like this:
+
+```python
+from django.db import models
+
+
+class Person(models.Model):
+  first_name = models.CharField(max_length=30)
+  last_name = models.CharField(max_length=30)
+
+  @property
+  def full_name(self):
+    return '%s %s' %
+
+```
+
+Using RedRover, we can fully test this model's behavior like so:
+
+```python
+from redrover import *
+
+from people.models import Person
+
+
+class PersonTest(RedRoverTest):
+
+  subject = 'person'
+
+  def setUp(self):
+    self.person = Person(first_name='Bob', last_name='Smith')
+
+  @describe
+  def attributes(self):
+    it.should(respond_to, 'first_name')
+    it.should(respond_to, 'last_name')
+    it.should(respond_to, 'full_name')
+    its('full_name').should(equal, "Bob Smith")
+
+    it.should(be_valid)
+
+  @describe
+  def when_first_name_is_blank(self):
+    self.person.first_name = ""
+    it.should_not(be_valid)
+
+  @describe
+  def when_last_name_is_blank(self):
+    self.person.last_name = ""
+    it.should_not(be_valid)
+
+```
 
 You are not completely restricted to writing tests in this way.  The
 standard unittest library and assertions work as good as ever; and
