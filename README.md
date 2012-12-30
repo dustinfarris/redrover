@@ -6,8 +6,9 @@ made available for the curious only.
 
 [![Build Status](https://travis-ci.org/dustinfarris/redrover.png?branch=master)](https://travis-ci.org/dustinfarris/redrover)
 
-RedRover is a testing utility suite for Django.  It wraps other powerful
-tools such as Nose and Selinium into an easy to use and read syntax.
+RedRover is a behavior-driven testing utility suite for Django.  It
+wraps other powerful tools such as Nose and Selinium into a clean
+readable syntax that is easy to use.
 
 At its core, RedRover borrows from other python projects and provides
 an interface with custom syntax sugar inspired by the RSpec and Capybara
@@ -32,6 +33,10 @@ These will be automatically installed for you.
 * rednose
 * splinter
 
+It is also highly recommended that you install and use [FactoryBoy][1].
+While not strictly required to run RedRover, it is a very nice
+compliment to RedRover's operation and is used in many of the examples.
+
 Configuration
 -------------
 Add ``'redrover'`` to the bottom of your ``INSTALLED_APPS``.  Also add
@@ -45,8 +50,8 @@ No big changes here:
 
     python manage.py test
 
-Since RedRover wraps [nose][1] (via django_nose), you get all of its
-testing options as well.  See their [documentation][2]  for details, or
+Since RedRover wraps [nose][2] (via django_nose), you get all of its
+testing options as well.  See their [documentation][3]  for details, or
 just run ``python manage.py help test``.
 
 Writing Tests
@@ -73,5 +78,6 @@ this:
 Running ``./manage.py test`` should result in some nice looking output
 that informs you all tests have passed.
 
-[1]: https://github.com/nose-devs/nose
-[2]: https://nose.readthedocs.org/en/latest/
+[1]: https://github.com/dnerdy/factory_boy
+[2]: https://github.com/nose-devs/nose
+[3]: https://nose.readthedocs.org/en/latest/
