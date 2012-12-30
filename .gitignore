@@ -8,3 +8,4 @@ pip-log.txt
 /build
 /dist
 /env
+/example/env
