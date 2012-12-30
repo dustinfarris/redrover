@@ -23,8 +23,9 @@ Installation
 ------------
 Install via pip.
 
-    :::sh
+    ```sh
     $ pip install redrover
+    ```
 
 Dependencies
 ------------
