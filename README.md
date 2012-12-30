@@ -44,13 +44,17 @@ Configuration
 Add ``'redrover'`` to the bottom of your ``INSTALLED_APPS``.  Also add
 the following configuration to your settings.py:
 
-    TEST_RUNNER = 'redrover.RedRoverRunner'
+```python
+TEST_RUNNER = 'redrover.RedRoverRunner'
+```
 
 Usage
 -----
 No big changes here:
 
-    python manage.py test
+```sh
+$ python manage.py test
+```
 
 Since RedRover wraps [nose][2] (via django_nose), you get all of its
 testing options as well.  See their [documentation][3]  for details, or
@@ -66,15 +70,17 @@ evaluate the subject's behavior by referring to "it."
 In the simplest form, suppose we want to show that the number 5 can be
 attained by adding the numbers 2 and 3.  Our test would look like this:
 
-    from redrover import *
+```python
+from redrover import *
 
 
-    class NumberFiveTest(RedRoverTest):
+class NumberFiveTest(RedRoverTest):
 
-      subject = 5
+  subject = 5
 
-      def test_addition(self):
-        it.should(equal, 2 + 3)
+  def test_addition(self):
+    it.should(equal, 2 + 3)
+```
 
 Running ``./manage.py test`` should result in some nice looking output
 that informs you all tests have passed.
