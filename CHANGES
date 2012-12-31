@@ -1,3 +1,14 @@
+Version 0.6.0
+-------------
+
+* Created HaveTextAssertion
+* Created `visit` action for Splinter
+* Created `action` function to run methods on a splinter Browser
+* When 'page' is the subject, a splinter Browser is automatically spun up
+* Added zope.testbrowser to requirements
+* More tests
+
+
 Version 0.5.0
 -------------
 

@@ -44,7 +44,7 @@ install_requires = [
 
 setup(
   name='redrover',
-  version='0.5.0',
+  version='0.6.0',
   author='Dustin Farris',
   author_email='dustin@dustinfarris.com',
   url='https://github.com/dustinfarris/redrover',
