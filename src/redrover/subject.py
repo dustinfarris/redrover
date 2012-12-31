@@ -1,6 +1,21 @@
 import functools
 
 
+def _splinter_action(_parent, _action):
+
+  _browser = _parent.page
+
+  def do_action(*args, **kwargs):
+    if _action == 'visit':
+      base_url = _parent.live_server_url
+      url = args[0]
+      return _browser.visit('%s%s' % (base_url, url))
+
+    return getattr(_browser, _action)(*args, **kwargs)
+
+  return do_action
+
+
 def _subject(parent=None):
 
   class Subject(object):
