@@ -39,7 +39,8 @@ install_requires = [
   'Django>=1.4',
   'django_nose',
   'rednose==0.3.3',
-  'splinter']
+  'splinter',
+  'zope.testbrowser']
 
 setup(
   name='redrover',
