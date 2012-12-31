@@ -42,19 +42,29 @@ def _subject(parent=None):
 
 
 def describe(func):
+
   @functools.wraps(func)
   def test_describe(instance, *args, **kwargs):
     subject_name = getattr(instance, 'subject', None)
+    extra_context = {}
+
     if subject_name:
       subject = getattr(instance, subject_name, None)
       if not subject:
         raise NameError(
           'You are trying to use a subject that has not been initialized ' +
           'in `setUp`.')
-      It = _subject()
-      Its = _subject(subject)
-      func.__globals__.update({
-        'it': It(subject),
-        'its': Its})
+
+      if subject_name == 'page':
+        extra_context.update({
+          'visit': _splinter_action(instance, 'visit')})
+
+      extra_context.update({
+        'it': _subject()(subject),
+        'its': _subject(subject)})
+
+      func.__globals__.update(extra_context)
+
     return func(instance, *args, **kwargs)
+
   return test_describe
