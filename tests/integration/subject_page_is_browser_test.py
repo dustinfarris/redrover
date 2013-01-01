@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import splinter
 
-from redrover import RedRoverTest
+from redrover import RedRoverLiveTest
 
 
 class SubjectPageIsBrowserTest(TestCase):
@@ -10,10 +10,13 @@ class SubjectPageIsBrowserTest(TestCase):
   @classmethod
   def setUpClass(cls):
 
-    class DummyTest(RedRoverTest):
+    class DummyTest(RedRoverLiveTest):
       subject = 'page'
 
-    cls.dummy_test = DummyTest
+      def runTest(self):
+        pass
+
+    cls.dummy_test = DummyTest()
 
   def test_subject_is_browser(self):
     """

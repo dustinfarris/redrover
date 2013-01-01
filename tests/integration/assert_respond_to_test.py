@@ -8,9 +8,9 @@ from tests.factories import PersonFactory
 class AssertRespondToTest(TestCase):
 
   def setUp(self):
-    subject = _subject()
-    person = PersonFactory.build()
-    self.subject = subject(person)
+    subject = _subject(self)
+    self.person = PersonFactory.build()
+    self.subject = subject('person')
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(respond_to, 'first_name'))

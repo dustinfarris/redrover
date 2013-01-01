@@ -1,6 +1,3 @@
-import functools
-
-
 def _splinter_action(_parent, _action):
 
   _browser = _parent.page
@@ -16,15 +13,12 @@ def _splinter_action(_parent, _action):
   return do_action
 
 
-def _subject(parent=None):
+def _subject(instance, parent_name=None):
 
   class Subject(object):
 
-    def __init__(self, value):
-      if parent:
-        self.value = getattr(parent, value)
-      else:
-        self.value = value
+    def __init__(self, name):
+      self.name = name
 
     def should(self, cls, *args, **kwargs):
       assertion = cls(self.value, *args, **kwargs)
@@ -38,33 +32,11 @@ def _subject(parent=None):
         raise AssertionError(assertion.message)
       return True
 
+    @property
+    def value(self):
+      if parent_name:
+        parent = getattr(instance, parent_name)
+        return getattr(parent, self.name)
+      return getattr(instance, self.name)
+
   return Subject
-
-
-def describe(func):
-
-  @functools.wraps(func)
-  def test_describe(instance, *args, **kwargs):
-    subject_name = getattr(instance, 'subject', None)
-    extra_context = {}
-
-    if subject_name:
-      subject = getattr(instance, subject_name, None)
-      if not subject:
-        raise NameError(
-          'You are trying to use a subject that has not been initialized ' +
-          'in `setUp`.')
-
-      if subject_name == 'page':
-        extra_context.update({
-          'visit': _splinter_action(instance, 'visit')})
-
-      extra_context.update({
-        'it': _subject()(subject),
-        'its': _subject(subject)})
-
-      func.__globals__.update(extra_context)
-
-    return func(instance, *args, **kwargs)
-
-  return test_describe

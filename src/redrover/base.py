@@ -1,57 +1,73 @@
+import functools
 from types import FunctionType
 
 from django.test import LiveServerTestCase, TestCase
 import splinter
 
-from subject import _splinter_action
+from subject import _splinter_action, _subject
 
 
-def do_decorate(attr, value):
-  protected = [
-    'setUp', 'setUpClass', 'tearDown', 'tearDownClass',
-    'run', 'skipTest', 'debug']
-  return (
-    '__' not in attr and
-    attr not in protected and
-    isinstance(value, FunctionType))
+def describe(func):
+  """
+  This more or less is the "magic" of RedRover.  With the `describe`
+  decorator, a test is equipped with the keywords 'it', 'its', and
+  if applicable, 'visit'.
+
+  """
+  @functools.wraps(func)
+  def test_func(instance, *args, **kwargs):
+    subject_name = getattr(instance, 'subject', None)
+
+    if subject_name:
+      extra_context = {
+        'it': _subject(instance)(subject_name),
+        'its': _subject(instance, parent_name=subject_name)}
+
+      if subject_name == 'page':
+        extra_context.update({
+          'visit': _splinter_action(instance, 'visit')})
+
+      # Now do the actual "decorating"
+      func.__globals__.update(extra_context)
+
+    return func(instance, *args, **kwargs)
+
+  return test_func
 
 
-def decorate_all():
+def _is_protected(item):
+    """Filter out things we shouldn't be messing with."""
+    return ('__' in item or item in dir(LiveServerTestCase))
 
-  class DecorateAll(type):
+
+def _redrover_klass():
+  """
+  Prefix test methods with 'test_' so they are discoverable by the
+  test runner.
+
+  """
+  class DiscoverableTests(type):
 
     def __new__(cls, name, bases, dct):
-      subject = dct.get('subject')
-      if subject:
-        if subject in dct:
-          raise NameError(
-            'You cannot use "%s" as a subject name.' % subject)
-
-        if subject == 'page':
-          dct['page'] = splinter.Browser('zope.testbrowser')
-
       for attr, value in dct.iteritems():
-        if do_decorate(attr, value):
-          if isinstance(value, FunctionType):
-            value.__name__ = 'test_%s' % value.__name__
+        if not _is_protected(attr) and isinstance(value, FunctionType):
+          value.__name__ = 'test_%s' % value.__name__
+      return super(DiscoverableTests, cls).__new__(cls, name, bases, dct)
 
-      dct['_browser'] = splinter.Browser('zope.testbrowser')
-
-      return super(DecorateAll, cls).__new__(
-        cls, name, bases, dct)
-
-  return DecorateAll
+  return DiscoverableTests
 
 
 class RedRoverTest(TestCase):
 
-  __metaclass__ = decorate_all()
+  __metaclass__ = _redrover_klass()
 
 
 class RedRoverLiveTest(LiveServerTestCase):
 
   def __init__(self, *args, **kwargs):
-    self.setUp.__globals__.update({'visit': _splinter_action(self, 'visit')})
+    if getattr(self, 'subject', None) == 'page':
+      self.page = splinter.Browser('zope.testbrowser')
+      self.setUp.__globals__.update({'visit': _splinter_action(self, 'visit')})
     super(RedRoverLiveTest, self).__init__(*args, **kwargs)
 
-  __metaclass__ = decorate_all()
+  __metaclass__ = _redrover_klass()

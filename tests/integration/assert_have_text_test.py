@@ -19,8 +19,8 @@ class AssertHaveTextTest(LiveServerTestCase):
 
   def setUp(self):
     self.dummy_test.page.visit('%s/people/' % self.live_server_url)
-    subject = _subject()
-    self.subject = subject(self.dummy_test.page)
+    subject = _subject(self.dummy_test)
+    self.subject = subject('page')
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(have_text, 'People'))

@@ -8,8 +8,9 @@ class AssertBeTest(TestCase):
 
   @classmethod
   def setUpClass(cls):
-    subject = _subject()
-    cls.subject = subject(1)
+    subject = _subject(cls)
+    cls.number = 1
+    cls.subject = subject('number')
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(be, 1))
