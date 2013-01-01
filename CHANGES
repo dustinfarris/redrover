@@ -1,3 +1,13 @@
+Version 0.6.2
+-------------
+
+* Code reorginization
+* Imported 'nose' assertions
+* Forked django_nose and added to dependency links.  This is necessary
+  to get a few of the toys off the master branch while we wait for
+  jbalogh to version bump.
+
+
 Version 0.6.0
 -------------
 
