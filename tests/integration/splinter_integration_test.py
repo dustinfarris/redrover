@@ -13,7 +13,7 @@ class SplinterIntegrationTest(LiveServerTestCase):
 
   def setUp(self):
     self.splinter_actions = get_splinter_actions(self)
-    self.page.visit(self.live_server_url)
+    self.page.visit('%s/' % self.live_server_url)
 
   def test_visit_action(self):
     do_visit = self.splinter_actions['visit']
