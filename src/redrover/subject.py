@@ -1,11 +1,21 @@
-def _splinter_action(_parent, _action):
+from urlparse import urlparse
 
-  _browser = _parent.page
+
+def _splinter_action(_parent, _action):
+  """
+  Hook to perform the specified action against the parent's
+  `page` attriburte.
+
+  """
 
   def do_action(*args, **kwargs):
+    _browser = getattr(_parent, 'page')
+
     if _action == 'visit':
-      base_url = _parent.live_server_url
       url = args[0]
+      if url.startswith('http'):
+        return _browser.visit(url)
+      base_url = getattr(_parent, 'live_server_url')
       return _browser.visit('%s%s' % (base_url, url))
 
     return getattr(_browser, _action)(*args, **kwargs)
@@ -13,12 +23,29 @@ def _splinter_action(_parent, _action):
   return do_action
 
 
-def _subject(instance, parent_name=None):
+def get_splinter_actions(instance):
+  """
+  A dictionary of all supported Splinter actions set up against the
+  given test-class instance.
 
+  """
+  return {
+    'visit': _splinter_action(instance, 'visit'),
+    'current_path': _subject(
+      instance.page, modifier=lambda url: urlparse(url).path)('url')}
+
+
+def _subject(instance, parent_name=None, modifier=None):
+  """
+  The Subject object references a particular attribute and allows the
+  developer to check it for various behaivors and conditions.
+
+  """
   class Subject(object):
 
     def __init__(self, name):
       self.name = name
+      self.instance = instance  # For debugging
 
     def should(self, cls, *args, **kwargs):
       assertion = cls(self.value, *args, **kwargs)

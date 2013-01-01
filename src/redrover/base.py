@@ -4,7 +4,7 @@ from types import FunctionType
 from django.test import LiveServerTestCase, TestCase
 import splinter
 
-from subject import _splinter_action, _subject
+from subject import get_splinter_actions, _subject
 
 
 def describe(func):
@@ -24,8 +24,7 @@ def describe(func):
         'its': _subject(instance, parent_name=subject_name)}
 
       if subject_name == 'page':
-        extra_context.update({
-          'visit': _splinter_action(instance, 'visit')})
+        extra_context.update(get_splinter_actions(instance))
 
       # Now do the actual "decorating"
       func.__globals__.update(extra_context)
@@ -67,7 +66,7 @@ class RedRoverLiveTest(LiveServerTestCase):
   def __init__(self, *args, **kwargs):
     if getattr(self, 'subject', None) == 'page':
       self.page = splinter.Browser('zope.testbrowser')
-      self.setUp.__globals__.update({'visit': _splinter_action(self, 'visit')})
+      self.setUp.__globals__.update(get_splinter_actions(self))
     super(RedRoverLiveTest, self).__init__(*args, **kwargs)
 
   __metaclass__ = _redrover_klass()
