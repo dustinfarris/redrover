@@ -36,7 +36,35 @@ def _subject(instance, parent_name=None):
     def value(self):
       if parent_name:
         parent = getattr(instance, parent_name)
-        return getattr(parent, self.name)
-      return getattr(instance, self.name)
+        _value = getattr(parent, self.name)
+      else:
+        _value = getattr(instance, self.name)
+      if modifier:
+        _value = modifier(_value)
+      return _value
+
+    def __str__(self):
+      return str(self.value)
+
+    def __repr__(self):
+      return self.__str__()
+
+    def __lt__(self, other):
+      return self.value < other
+
+    def __le__(self, other):
+      return self.value <= other
+
+    def __eq__(self, other):
+      return self.value == other
+
+    def __ne__(self, other):
+      return self.value != other
+
+    def __gt__(self, other):
+      return self.value > other
+
+    def __ge__(self, other):
+      return self.value >= other
 
   return Subject
