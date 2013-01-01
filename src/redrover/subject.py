@@ -25,8 +25,8 @@ def _splinter_action(_parent, _action):
 
 def get_splinter_actions(instance):
   """
-  A dictionary of all supported Splinter actions set up against the
-  given test-class instance.
+  A dictionary of all supported Splinter actions plus a few of my own
+  set up against the given test-class instance.
 
   """
   return {
