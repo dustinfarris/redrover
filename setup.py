@@ -37,10 +37,13 @@ tests_require = [
 
 install_requires = [
   'Django>=1.4',
-  'django_nose',
+  'django-nose==commit.7fd013209',
   'rednose==0.3.3',
   'splinter',
   'zope.testbrowser']
+
+dependency_links = [
+  'https://github.com/dustinfarris/django-nose/archive/7fd013209.tar.gz#egg=django-nose-commit.7fd013209']
 
 setup(
   name='redrover',
@@ -55,6 +58,7 @@ setup(
   zip_safe=False,
   install_requires=install_requires,
   tests_require=tests_require,
+  dependency_links=dependency_links,
   test_suite='runtests.runtests',
   license='BSD',
   include_package_data=True,
