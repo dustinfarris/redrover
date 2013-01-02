@@ -1,3 +1,17 @@
+Version 0.7.0
+-------------
+
+* Added HaveSelectorAssertion
+* Added 'click_on' action
+* Added 'before' decorator for the setUp method
+* Made the assertion "be" synonomous with "equal" and created(renamed)
+  be_exactly in its place.
+* Added 'current_path' subject
+* Added rich comparison operators to Subject
+* Code improvements
+* Documentation updates
+
+
 Version 0.6.2
 -------------
 
