@@ -157,6 +157,38 @@ class PersonTest(RedRoverTest):
 
 ```
 
+Page Tests
+----------
+
+A.k.a "view/template" tests, here we'll identify the "page" as the
+subject and define how it should look/behave as we do things to it.
+Here's an example:
+
+```python
+from redrover import *
+
+
+class PagesTest(RedRoverTest):
+
+  subject = 'page'
+
+  @before
+  def setUp(self):
+    visit('/')
+
+  @describe
+  def the_homepage(self):
+    its('title').should(be, 'Homepage')
+    it.should(have_text, 'Welcome')
+
+  @describe
+  def navigating_to_the_people_index(self):
+    click_link('People')
+    its('title').should(be, 'People')
+    it.should(have_selector, 'h1', text='People')
+
+```
+
 You are not completely restricted to writing tests in this way.  The
 standard unittest library and assertions work as good as ever; and
 they may be preferable in some cases.  Where RedRover really shines
