@@ -1,26 +1,36 @@
 from urlparse import urlparse
 
+from splinter.exceptions import ElementDoesNotExist
 
-def _splinter_action(_parent, _action):
+
+class ElementNotFound(ElementDoesNotExist):
+  pass
+
+
+def _splinter_action(_action, _parent):
   """
-  Hook to perform the specified action against the parent's
-  `page` attriburte.
+  All the various splinter actions we support.  (and a few others)
 
   """
+  _browser = getattr(_parent, 'page')
 
-  def do_action(*args, **kwargs):
-    _browser = getattr(_parent, 'page')
+  def visit(location):
+    if location.startswith('http'):
+      return _browser.visit(location)
+    base_url = _parent.live_server_url
+    return _browser.visit('%s%s' % (base_url, location))
 
-    if _action == 'visit':
-      url = args[0]
-      if url.startswith('http'):
-        return _browser.visit(url)
-      base_url = getattr(_parent, 'live_server_url')
-      return _browser.visit('%s%s' % (base_url, url))
+  def click_link(locator):
+    # First we'll try by text, then by CSS selector
+    links = _browser.find_link_by_text(locator)
+    if links:
+      return links.first.click()
+    links = _browser.find_by_css('a').find_by_css(locator)
+    if links:
+      return links.first.click()
+    raise ElementNotFound()
 
-    return getattr(_browser, _action)(*args, **kwargs)
-
-  return do_action
+  return locals().get(_action)
 
 
 def get_splinter_actions(instance):
@@ -30,7 +40,8 @@ def get_splinter_actions(instance):
 
   """
   return {
-    'visit': _splinter_action(instance, 'visit'),
+    'click_link': _splinter_action('click_link', instance),
+    'visit': _splinter_action('visit', instance),
     'current_path': _subject(
       instance.page, modifier=lambda url: urlparse(url).path)('url')}
 
