@@ -19,8 +19,11 @@ class RedRoverSplinterActionsTest(RedRoverLiveTest):
 
   subject = 'page'
 
+  @before
+  def setUp(self):
+    visit('/')
+
   @describe
   def when_i_visit_the_home_page(self):
-    # Tests `visit` and `current_path
-    visit('/')
+    # Tests `visit` and `current_path`
     current_path.should(equal, '/')

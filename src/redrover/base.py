@@ -7,6 +7,34 @@ import splinter
 from subject import get_splinter_actions, _subject
 
 
+def _get_extra_context(instance, extra_context={}):
+  subject_name = getattr(instance, 'subject', None)
+
+  if subject_name:
+    extra_context = {
+      'it': _subject(instance)(subject_name),
+      'its': _subject(instance, parent_name=subject_name)}
+
+    if subject_name == 'page':
+      extra_context.update(get_splinter_actions(instance))
+
+  return extra_context
+
+
+def before(func):
+  """
+  The only way to get `setUp` to behave the way we want is to decorate
+  it.  So might as well make it look intentional :)
+
+  """
+  @functools.wraps(func)
+  def setUp(instance, *args, **kwargs):
+    func.__globals__.update(_get_extra_context(instance))
+    return func(instance, *args, **kwargs)
+
+  return setUp
+
+
 def describe(func):
   """
   This more or less is the "magic" of RedRover.  With the `describe`
@@ -16,19 +44,7 @@ def describe(func):
   """
   @functools.wraps(func)
   def test_func(instance, *args, **kwargs):
-    subject_name = getattr(instance, 'subject', None)
-
-    if subject_name:
-      extra_context = {
-        'it': _subject(instance)(subject_name),
-        'its': _subject(instance, parent_name=subject_name)}
-
-      if subject_name == 'page':
-        extra_context.update(get_splinter_actions(instance))
-
-      # Now do the actual "decorating"
-      func.__globals__.update(extra_context)
-
+    func.__globals__.update(_get_extra_context(instance))
     return func(instance, *args, **kwargs)
 
   return test_func
@@ -36,7 +52,7 @@ def describe(func):
 
 def _is_protected(item):
     """Filter out things we shouldn't be messing with."""
-    return ('__' in item or item in dir(LiveServerTestCase))
+    return ('__' in item or item in dir(LiveServerTestCase) + ['do'])
 
 
 def _redrover_klass():
