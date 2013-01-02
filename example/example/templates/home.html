@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+{% load url from future %}
 
 {% block content %}
 <h1>Welcome to RedRover</h1>
+
+<p>Have a look at the <a href="{% url 'people:index' %}">people</a> app.</p>
+
 {% endblock content %}
