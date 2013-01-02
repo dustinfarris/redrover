@@ -8,7 +8,7 @@ class HaveTextAssertion(BaseAssertion):
     if not hasattr(browser, 'html'):
       raise ValueError(
         '`have_text` must be called on a page/Browser instance.')
-    self.browser = browser
+    self.url = browser.url
     self.text = text
     self.passes = text in browser.html
 
@@ -21,4 +21,4 @@ class HaveTextAssertion(BaseAssertion):
 
     return msg.format(
       text=repr(self.text),
-      url=self.browser.url)
+      url=self.url)
