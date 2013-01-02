@@ -1,7 +1,7 @@
 from base import BaseAssertion
 
 
-class BeAssertion(BaseAssertion):
+class BeExactlyAssertion(BaseAssertion):
   """Determine if two objects are identical."""
 
   def __init__(self, subject, other):

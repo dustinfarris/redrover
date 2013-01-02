@@ -33,7 +33,7 @@ class RedRoverBasicAssertions(RedRoverTest):
   @describe
   def when_is(self):
     x = self.cities
-    it.should(be, x)
+    it.should(be_exactly, x)
 
   @describe
   def when_is_not(self):
@@ -42,4 +42,4 @@ class RedRoverBasicAssertions(RedRoverTest):
     memory -- which passes the test ala "should_not".
 
     """
-    it.should_not(be, ['New York', 'Springfield', 'Orlando'])
+    it.should_not(be_exactly, ['New York', 'Springfield', 'Orlando'])

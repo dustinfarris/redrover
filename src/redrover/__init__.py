@@ -1,17 +1,18 @@
 from django_nose.tools import *
-from assertions import BeAssertion as be, BeValidAssertion as be_valid, \
-  EqualAssertion as equal, HaveTextAssertion as have_text, \
+from assertions import BeExactlyAssertion as be_exactly, \
+  BeValidAssertion as be_valid, EqualAssertion as equal, \
+  EqualAssertion as be, HaveTextAssertion as have_text, \
   RespondToAssertion as respond_to \
 
-from base import RedRoverLiveTest, RedRoverTest, describe
+from base import RedRoverLiveTest, RedRoverTest, before, describe
 from runner import RedRoverRunner
 
 
 __all__ = [
-  'RedRoverRunner', 'RedRoverLiveTest', 'RedRoverTest', 'describe',
+  'RedRoverRunner', 'RedRoverLiveTest', 'RedRoverTest', 'before', 'describe',
 
   # RedRover assertions
-  'be', 'be_valid', 'equal', 'have_text', 'respond_to',
+  'be', 'be_exactly', 'be_valid', 'equal', 'have_text', 'respond_to',
 
   # Nose assertions
   'assert_true', 'assert_equal', 'assert_template_not_used',

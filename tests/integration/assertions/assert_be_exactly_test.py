@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from redrover import be
+from redrover import be_exactly
 from redrover.subject import _subject
 
 
@@ -13,15 +13,15 @@ class AssertBeTest(TestCase):
     cls.subject = subject('number')
 
   def test_should_passes(self):
-    self.assertTrue(self.subject.should(be, 1))
+    self.assertTrue(self.subject.should(be_exactly, 1))
 
   def test_should_fails(self):
     with self.assertRaises(AssertionError):
-      self.subject.should(be, True)
+      self.subject.should(be_exactly, True)
 
   def test_should_not_passes(self):
-    self.assertTrue(self.subject.should_not(be, '1'))
+    self.assertTrue(self.subject.should_not(be_exactly, '1'))
 
   def test_should_not_fails(self):
     with self.assertRaises(AssertionError):
-      self.subject.should_not(be, 1)
+      self.subject.should_not(be_exactly, 1)
