@@ -27,3 +27,10 @@ class RedRoverSplinterActionsTest(RedRoverLiveTest):
   def when_i_visit_the_home_page(self):
     # Tests `visit` and `current_path`
     current_path.should(equal, '/')
+
+  @describe
+  def when_i_click_on_a_link(self):
+    # Tests `click_on` and `have_selector`
+    click_link('people')
+    its('title').should(be, 'People')
+    it.should(have_selector, 'h1', text='People')
