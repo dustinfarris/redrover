@@ -52,7 +52,7 @@ def describe(func):
 
 def _is_protected(item):
     """Filter out things we shouldn't be messing with."""
-    return ('__' in item or item in dir(LiveServerTestCase) + ['do'])
+    return ('__' in item or item in dir(LiveServerTestCase))
 
 
 def _redrover_klass():
