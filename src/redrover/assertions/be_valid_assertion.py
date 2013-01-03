@@ -31,4 +31,4 @@ class BeValidAssertion(BaseAssertion):
         errors += [(i, ' '.join(self.error_messages[i]))]
       return msg.format(
         subject=repr(self.subject),
-        message=''.join(["%s: %s" % i for i in errors]))
+        message="\033[0m" + ''.join(["%s: %s" % i for i in errors]))
