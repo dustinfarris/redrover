@@ -1,7 +1,7 @@
 from django.test import LiveServerTestCase
 import splinter
 
-from redrover import have_selector
+from redrover import have_selector, page
 from redrover.subject import _subject
 
 
@@ -11,16 +11,16 @@ class AssertHaveSelectorTest(LiveServerTestCase):
   def setUpClass(cls):
 
     class DummyTest():
-      page = splinter.Browser('zope.testbrowser')
-      subject = 'page'
+      _browser = splinter.Browser('zope.testbrowser')
+      subject = page
 
     cls.dummy_test = DummyTest()
     super(AssertHaveSelectorTest, cls).setUpClass()
 
   def setUp(self):
-    self.dummy_test.page.visit('%s/people/' % self.live_server_url)
+    getattr(self.dummy_test, page).visit('%s/people/' % self.live_server_url)
     subject = _subject(self.dummy_test)
-    self.subject = subject('page')
+    self.subject = subject(page)
 
   def test_should_passes(self):
     self.assertTrue(self.subject.should(have_selector, 'h1'))

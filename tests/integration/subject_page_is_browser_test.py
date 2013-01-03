@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import splinter
 
-from redrover import RedRoverLiveTest
+from redrover import RedRoverLiveTest, page
 
 
 class SubjectPageIsBrowserTest(TestCase):
@@ -11,7 +11,7 @@ class SubjectPageIsBrowserTest(TestCase):
   def setUpClass(cls):
 
     class DummyTest(RedRoverLiveTest):
-      subject = 'page'
+      subject = page
 
       def runTest(self):
         pass
@@ -25,4 +25,4 @@ class SubjectPageIsBrowserTest(TestCase):
 
     """
     zope_testbrowser = splinter.Browser('zope.testbrowser')
-    self.assertEqual(type(self.dummy_test.page), type(zope_testbrowser))
+    self.assertEqual(type(self.dummy_test._browser), type(zope_testbrowser))

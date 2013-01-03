@@ -17,7 +17,7 @@ from redrover import *
 
 class RedRoverSplinterActionsTest(RedRoverLiveTest):
 
-  subject = 'page'
+  subject = page
 
   @before
   def setUp(self):

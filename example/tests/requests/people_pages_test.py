@@ -3,8 +3,9 @@ from redrover import *
 
 class PeoplePagesTest(RedRoverLiveTest):
 
-  subject = 'page'
+  subject = page
 
+  @before
   def setUp(self):
     visit('/people/')
 

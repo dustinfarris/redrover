@@ -9,17 +9,17 @@ class SplinterActionTest(unittest.TestCase):
 
   @classmethod
   def setUpClass(cls):
-    cls.page = splinter.Browser('zope.testbrowser')
+    cls._browser = splinter.Browser('zope.testbrowser')
 
   def setUp(self):
-    self.page.visit('http://dustinfarris.com/')
+    self._browser.visit('http://dustinfarris.com/')
     self.splinter_actions = get_splinter_actions(self)
 
   def test_visit_action(self):
     """It should navigate to the desired page."""
     do_visit = self.splinter_actions['visit']
     do_visit('http://dustinfarris.com/about/')
-    self.assertEqual('http://dustinfarris.com/about/', self.page.url)
+    self.assertEqual('http://dustinfarris.com/about/', self._browser.url)
 
   def test_current_path_action(self):
     """It should report the correct path."""

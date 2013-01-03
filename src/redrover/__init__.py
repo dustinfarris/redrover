@@ -6,10 +6,12 @@ from assertions import BeExactlyAssertion as be_exactly, \
 
 from base import RedRoverLiveTest, RedRoverTest, before, describe
 from runner import RedRoverRunner
+from subject import BROWSER as page
 
 
 __all__ = [
   'RedRoverRunner', 'RedRoverLiveTest', 'RedRoverTest', 'before', 'describe',
+  'page',
 
   # RedRover assertions
   'be', 'be_exactly', 'be_valid', 'equal', 'have_selector', 'have_text',

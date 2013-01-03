@@ -14,7 +14,7 @@ class SplinterActionTest(unittest.TestCase):
 
     class ParentClass():
       def __init__(self):
-        self.page = Browser()
+        self._browser = Browser()
 
     cls.ParentClass = ParentClass
 

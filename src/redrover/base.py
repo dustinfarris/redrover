@@ -4,7 +4,7 @@ from types import FunctionType
 from django.test import LiveServerTestCase, TestCase
 import splinter
 
-from subject import get_splinter_actions, _subject
+from subject import get_splinter_actions, _subject, BROWSER
 
 
 def _get_extra_context(instance, extra_context={}):
@@ -15,7 +15,7 @@ def _get_extra_context(instance, extra_context={}):
       'it': _subject(instance)(subject_name),
       'its': _subject(instance, parent_name=subject_name)}
 
-    if subject_name == 'page':
+    if subject_name == BROWSER:
       extra_context.update(get_splinter_actions(instance))
 
   return extra_context
@@ -80,8 +80,8 @@ class RedRoverTest(TestCase):
 class RedRoverLiveTest(LiveServerTestCase):
 
   def __init__(self, *args, **kwargs):
-    if getattr(self, 'subject', None) == 'page':
-      self.page = splinter.Browser('zope.testbrowser')
+    if getattr(self, 'subject', None) == BROWSER:
+      setattr(self, BROWSER, splinter.Browser('zope.testbrowser'))
       self.setUp.__globals__.update(get_splinter_actions(self))
     super(RedRoverLiveTest, self).__init__(*args, **kwargs)
 

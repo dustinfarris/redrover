@@ -7,12 +7,19 @@ class ElementNotFound(ElementDoesNotExist):
   pass
 
 
+BROWSER = '_browser'
+
+
 def _splinter_action(_action, _parent):
   """
   All the various splinter actions we support.  (and a few others)
 
   """
-  _browser = getattr(_parent, 'page')
+  _browser = getattr(_parent, BROWSER)
+
+  # Finders
+
+  # Actions
 
   def visit(location):
     if location.startswith('http'):
@@ -43,7 +50,7 @@ def get_splinter_actions(instance):
     'click_link': _splinter_action('click_link', instance),
     'visit': _splinter_action('visit', instance),
     'current_path': _subject(
-      instance.page, modifier=lambda url: urlparse(url).path)('url')}
+      instance._browser, modifier=lambda url: urlparse(url).path)('url')}
 
 
 def _subject(instance, parent_name=None, modifier=None):

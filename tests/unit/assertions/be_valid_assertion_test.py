@@ -27,4 +27,6 @@ class BeValidAssertionTest(TestCase):
   def test_fail_message(self):
     self.person.gender = "X"
     assertion = BeValidAssertion(self.person)
-    self.assertEqual('<Person: Dustin Farris> is not valid', assertion.message)
+    self.assertEqual((
+      "<Person: Dustin Farris> is not valid.  "
+      "\x1b[0mgender: Value 'X' is not a valid choice."), assertion.message)
