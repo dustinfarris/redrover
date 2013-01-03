@@ -15,14 +15,20 @@ class BeValidAssertion(BaseAssertion):
     self.passes = True
     try:
       subject.full_clean()
-    except ValidationError:
+    except ValidationError, e:
       self.passes = False
+      self.error_messages = e.message_dict
 
   @property
   def message(self):
     if self.passes:
       msg = '{subject} is valid'
+      return msg.format(subject=repr(self.subject))
     else:
-      msg = '{subject} is not valid'
-
-    return msg.format(subject=repr(self.subject))
+      msg = '{subject} is not valid.  {message}'
+      errors = []
+      for i in self.error_messages:
+        errors += [(i, ' '.join(self.error_messages[i]))]
+      return msg.format(
+        subject=repr(self.subject),
+        message=''.join(["%s: %s" % i for i in errors]))
