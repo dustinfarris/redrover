@@ -9,3 +9,4 @@ pip-log.txt
 /dist
 /env
 /example/env
+example.db
