@@ -170,7 +170,7 @@ from redrover import *
 
 class PagesTest(RedRoverTest):
 
-  subject = 'page'
+  subject = page
 
   @before
   def setUp(self):
