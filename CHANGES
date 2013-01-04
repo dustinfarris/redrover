@@ -1,3 +1,12 @@
+Version 0.7.2
+-------------
+
+* Better URL resolving
+* Use a `page` constant instead of detecting "page" as the subject
+* Added better error message for be_valid
+* Using Sphinx for documentation
+
+
 Version 0.7.0
 -------------
 
