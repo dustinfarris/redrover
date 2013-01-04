@@ -2,6 +2,8 @@ from urlparse import urlparse
 
 from splinter.exceptions import ElementDoesNotExist
 
+from utils import get_url
+
 
 class ElementNotFound(ElementDoesNotExist):
   pass
@@ -25,7 +27,8 @@ def _splinter_action(_action, _parent):
     if location.startswith('http'):
       return _browser.visit(location)
     base_url = _parent.live_server_url
-    return _browser.visit('%s%s' % (base_url, location))
+    url = get_url(location)
+    return _browser.visit('%s%s' % (base_url, url))
 
   def click_link(locator):
     # First we'll try by text, then by CSS selector

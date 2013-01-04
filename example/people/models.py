@@ -13,6 +13,11 @@ class Person(models.Model):
   def __unicode__(self):
     return self.full_name
 
+  @models.permalink
+  def get_absolute_url(self):
+    return ('people:detail', (), {'id': str(self.id)})
+
+
   @property
   def full_name(self):
     return '%s %s' % (self.first_name, self.last_name)

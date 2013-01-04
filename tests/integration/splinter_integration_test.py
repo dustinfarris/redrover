@@ -17,7 +17,7 @@ class SplinterIntegrationTest(LiveServerTestCase):
 
   def test_visit_action(self):
     do_visit = self.splinter_actions['visit']
-    do_visit('/people/')
+    do_visit('people:index')
     self.assertIn('<h1>People</h1>', getattr(self, BROWSER).html)
 
   def test_current_path_action(self):
