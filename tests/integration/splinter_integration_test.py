@@ -2,6 +2,7 @@ from django.test import LiveServerTestCase
 import splinter
 
 from redrover.subject import get_splinter_actions, BROWSER
+from tests.factories import PersonFactory
 
 
 class SplinterIntegrationTest(LiveServerTestCase):
@@ -23,3 +24,9 @@ class SplinterIntegrationTest(LiveServerTestCase):
   def test_current_path_action(self):
     do_current_path = self.splinter_actions['current_path']
     self.assertEqual('/', do_current_path)
+
+  def test_visit_complex_url_resolution(self):
+    person = PersonFactory()
+    do_visit = self.splinter_actions['visit']
+    do_visit('people:detail', args=[str(person.id)])
+    self.assertIn(person.first_name, getattr(self, BROWSER).html)

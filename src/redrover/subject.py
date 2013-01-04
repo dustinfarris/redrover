@@ -23,11 +23,11 @@ def _splinter_action(_action, _parent):
 
   # Actions
 
-  def visit(location):
+  def visit(location, *args, **kwargs):
     if location.startswith('http'):
       return _browser.visit(location)
     base_url = _parent.live_server_url
-    url = get_url(location)
+    url = get_url(location, *args, **kwargs)
     return _browser.visit('%s%s' % (base_url, url))
 
   def click_link(locator):

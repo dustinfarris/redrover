@@ -7,5 +7,5 @@ from models import Person
 
 urlpatterns = patterns('',
   url('^$', ListView.as_view(model=Person), name='index'),
-  url('^(?P<id>\d+)/$', DetailView.as_view(model=Person), name='detail'),
+  url('^(?P<pk>\d+)/$', DetailView.as_view(model=Person), name='detail'),
 )

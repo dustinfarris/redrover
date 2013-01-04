@@ -15,7 +15,7 @@ class Person(models.Model):
 
   @models.permalink
   def get_absolute_url(self):
-    return ('people:detail', (), {'id': str(self.id)})
+    return ('people:detail', (self.pk, ))
 
 
   @property
