@@ -1,0 +1,2 @@
+Hide "robots.txt not found" logging warnings
+Don't report full path on have_selector/text
