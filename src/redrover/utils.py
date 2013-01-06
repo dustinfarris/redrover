@@ -11,9 +11,6 @@ def get_url(obj, *args, **kwargs):
   try:
     return reverse(obj, *args, **kwargs)
   except NoReverseMatch:
-    warnings.warn(
-      'Could not reverse %s.  Assuming it is a URL.' % repr(obj),
-      RuntimeWarning)
     return str(obj)
   except:
     raise RuntimeError("Could not infer a url from object %s." % repr(obj))
