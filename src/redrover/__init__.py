@@ -1,8 +1,9 @@
 from django_nose.tools import *
 from assertions import BeExactlyAssertion as be_exactly, \
-  BeValidAssertion as be_valid, EqualAssertion as equal, \
-  EqualAssertion as be, HaveSelectorAssertion as have_selector, \
-  HaveTextAssertion as have_text, RespondToAssertion as respond_to \
+  BeValidAssertion as be_valid, ContainAssertion as contain, \
+  EqualAssertion as equal, EqualAssertion as be, \
+  HaveSelectorAssertion as have_selector, HaveTextAssertion as have_text, \
+  RespondToAssertion as respond_to
 
 from base import RedRoverLiveTest, RedRoverTest, before, describe
 from runner import RedRoverRunner
@@ -14,8 +15,8 @@ __all__ = [
   'page',
 
   # RedRover assertions
-  'be', 'be_exactly', 'be_valid', 'equal', 'have_selector', 'have_text',
-  'respond_to',
+  'be', 'be_exactly', 'be_valid', 'contain', 'equal', 'have_selector',
+  'have_text', 'respond_to',
 
   # Nose assertions
   'assert_true', 'assert_equal', 'assert_template_not_used',

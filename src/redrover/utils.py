@@ -1,5 +1,3 @@
-import warnings
-
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.db.models import Model as DjangoModel
 

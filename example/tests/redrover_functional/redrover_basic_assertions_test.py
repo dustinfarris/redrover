@@ -43,3 +43,8 @@ class RedRoverBasicAssertions(RedRoverTest):
 
     """
     it.should_not(be_exactly, ['New York', 'Springfield', 'Orlando'])
+
+  @describe
+  def when_contains(self):
+    it.should(contain, 'Springfield')
+    it.should_not(contain, 'Los Angeles')
