@@ -1,3 +1,5 @@
+from urlparse import urlparse
+
 from base import BaseAssertion
 
 
@@ -8,7 +10,7 @@ class HaveSelectorAssertion(BaseAssertion):
     if not hasattr(browser, 'html'):
       raise ValueError(
         '`have_selector` must be called on a page/Browser instance.')
-    self.url = browser.url
+    self.url = urlparse(browser.url).path
     self.selector = selector
     self.extras = kwargs
     elements = browser.find_by_css(selector)

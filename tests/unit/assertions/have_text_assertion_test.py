@@ -27,11 +27,11 @@ class HaveTextAssertionTest(LiveServerTestCase):
   def test_pass_message(self):
     assertion = HaveTextAssertion(self.browser, 'People')
     self.assertEqual(
-      "'People' appears in %s" % self.browser.url,
+      "'People' appears in /people/",
       assertion.message)
 
   def test_fail_message(self):
     assertion = HaveTextAssertion(self.browser, 'bluedabadee')
     self.assertEqual(
-      "'bluedabadee' does not appear in %s" % self.browser.url,
+      "'bluedabadee' does not appear in /people/",
       assertion.message)

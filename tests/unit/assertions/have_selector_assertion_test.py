@@ -27,11 +27,11 @@ class HaveSelectorAssertionTest(LiveServerTestCase):
   def test_pass_message(self):
     assertion = HaveSelectorAssertion(self.browser, 'h1')
     self.assertEqual(
-      "'h1' selector exists in %s" % self.browser.url,
+      "'h1' selector exists in /people/",
       assertion.message)
 
   def test_fail_message(self):
     assertion = HaveSelectorAssertion(self.browser, 'audio')
     self.assertEqual(
-      "'audio' selector does not exist in %s" % self.browser.url,
+      "'audio' selector does not exist in /people/",
       assertion.message)
