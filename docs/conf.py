@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # RedRover documentation build configuration file, created by
-# sphinx-quickstart on Wed Jan  9 00:46:02 2013.
+# sphinx-quickstart on Wed Jan  9 00:51:59 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
 #
@@ -48,7 +48,7 @@ copyright = u'2013, Dustin Farris'
 # built documents.
 #
 # The short X.Y version.
-version = '0.7'
+version = '0.7.2'
 # The full version, including alpha/beta/rc tags.
 release = '0.7.2'
 
