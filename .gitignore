@@ -10,3 +10,4 @@ pip-log.txt
 /env
 /example/env
 example.db
+/docs/_build
