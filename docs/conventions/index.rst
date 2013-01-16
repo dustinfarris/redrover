@@ -11,7 +11,7 @@ unittest library --- if it works in unittest, it will work in RedRover.
 
 Remember that tests are divided into 3 main categories:
 
-:Unit Tests:
+:Unit        Tests:
   Tests that check the a very specific piece of code is behaving as it
   should.
 
@@ -181,12 +181,9 @@ Suppose we have a Django app called "people" and we want to define the
 behavior of a model within this app called "Person".  Our test would go
 in a file named something like
 ``tests/models/people_person_model_test.py`` and would be called
-something like "PersonModelTest"::
-
-  # people_person_model_test.py
+something like PersonModelTest here::
 
   from redrover import *
-
 
   class PersonModelTest(RedRoverTest):
 
