@@ -5,6 +5,8 @@ from assertions import BeExactlyAssertion as be_exactly, \
   HaveSelectorAssertion as have_selector, HaveTextAssertion as have_text, \
   RespondToAssertion as respond_to
 
+from expectations import ChangeExpectation as change
+
 from base import RedRoverLiveTest, RedRoverTest, before, describe
 from expect import Expect as expect
 from runner import RedRoverRunner
@@ -18,6 +20,9 @@ __all__ = [
   # RedRover assertions
   'be', 'be_exactly', 'be_valid', 'contain', 'equal', 'have_selector',
   'have_text', 'respond_to',
+
+  # RedRover expectations
+  'change',
 
   # Nose assertions
   'assert_true', 'assert_equal', 'assert_template_not_used',

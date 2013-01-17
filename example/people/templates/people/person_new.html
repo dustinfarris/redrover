@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block title %}New Person{% endblock title %}
+
+{% block content %}
+<h1>New Person</h1>
+<form action="{% url "people:new" %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+{% endblock content %}
