@@ -6,13 +6,14 @@ from assertions import BeExactlyAssertion as be_exactly, \
   RespondToAssertion as respond_to
 
 from base import RedRoverLiveTest, RedRoverTest, before, describe
+from expect import Expect as expect
 from runner import RedRoverRunner
 from subject import BROWSER as page
 
 
 __all__ = [
   'RedRoverRunner', 'RedRoverLiveTest', 'RedRoverTest', 'before', 'describe',
-  'page',
+  'expect', 'page',
 
   # RedRover assertions
   'be', 'be_exactly', 'be_valid', 'contain', 'equal', 'have_selector',
