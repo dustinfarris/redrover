@@ -12,7 +12,7 @@ unittest library --- if it works in unittest, it will work in RedRover.
 Remember that tests are divided into 3 main categories:
 
 :Unit        Tests:
-  Tests that check the a very specific piece of code is behaving as it
+  Tests that check that a very specific piece of code is behaving as it
   should.
 
   These haven't changed much.  You can use the a few of the RedRover
@@ -43,15 +43,15 @@ tests for a Django project, we'll divide them into three areas:
 * Model Tests
 * Request Tests
 
-Unit Tests will, again, test specific pieces of your Django project.
-Model Tests, which could also be consider unit tests, will test that
-your individual models are set up properly and behave as expected.
-Finally, Request Tests will check that you Django project serves the
+**Unit Tests** will, again, test specific pieces of your Django project.
+**Model Tests**, which could also be considered unit tests, will test
+that your individual models are set up properly and behave as expected.
+Finally, **Request Tests** will check that you Django project serves the
 right pages and that they contain the right content as you navigate,
 fill out forms, etc.  These are your integration tests.
 
-In your root project directory, you should a tests directory to
-contain these.  It would look something like this::
+In your root project directory, you should have a tests directory to
+contain these.  It should look something like this::
 
   tests
     |
@@ -87,7 +87,7 @@ are an awesome replacement for fixtures.  Use it.
 Subjects and Assertions
 -----------------------
 
-The general syntax of RedRover works like this.
+The general flow of RedRover works like this:
 
   1. Declare a subject
   2. Define the subject
@@ -118,7 +118,7 @@ two primary tests: "should" and "should_not".  Within these tests we
 pass an assertion that 'should' or 'should not' pass, and any additional
 arguments that assertion might need.
 
-The syntax looks like this:
+The syntax looks like this::
 
   it.should|should_not(*assertion_name*, [*arg1, arg2, ...*])
 
@@ -131,7 +131,7 @@ would look like this::
 
 In this case, the assertion is "equal" and it *should* pass.  Behind the
 scenes "equal" compares self.mynumber --- which in this case is 4 ---
-and 2 + 2.  The do in fact equal, they "should" equal according to our
+and 2 + 2.  They do in fact equal, they "should" equal according to our
 test, so this test passes.
 
 You can also refer to attributes of the subject.  Suppose we have some
@@ -163,7 +163,7 @@ like this::
 You can also test properties::
 
   @describe
-  def my_objects_greeting(self):
+  def myobjects_greeting(self):
     its('greeting').should(be, "My name is bob")
 
 Behavior-driven Testing
