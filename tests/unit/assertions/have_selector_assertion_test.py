@@ -19,9 +19,17 @@ class HaveSelectorAssertionTest(LiveServerTestCase):
     assertion = HaveSelectorAssertion(self.browser, 'h1')
     self.assertTrue(assertion.passes)
 
+  def test_assertion_passes_with_kwarg(self):
+    assertion = HaveSelectorAssertion(self.browser, 'h1', text='People')
+    self.assertTrue(assertion.passes)
+
   def test_assertion_fails(self):
     """It should fail if the given selector does not exist in the document."""
     assertion = HaveSelectorAssertion(self.browser, 'audio')
+    self.assertFalse(assertion.passes)
+
+  def test_assertion_fails_with_kwarg(self):
+    assertion = HaveSelectorAssertion(self.browser, 'h1', text='Dogs')
     self.assertFalse(assertion.passes)
 
   def test_pass_message(self):

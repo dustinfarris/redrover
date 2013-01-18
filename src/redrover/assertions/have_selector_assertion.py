@@ -16,7 +16,7 @@ class HaveSelectorAssertion(BaseAssertion):
     elements = browser.find_by_css(selector)
     # Special requests
     for k in kwargs:
-      elements = [el for el in elements if getattr(el, k) == kwargs[k]]
+      elements = [el for el in elements if getattr(el, k).strip() == kwargs[k]]
 
     self.passes = bool(elements)
 

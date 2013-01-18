@@ -25,13 +25,27 @@ class AssertHaveSelectorTest(LiveServerTestCase):
   def test_should_passes(self):
     self.assertTrue(self.subject.should(have_selector, 'h1'))
 
+  def test_should_passes_with_text_kwarg(self):
+    self.assertTrue(self.subject.should(have_selector, 'h1', text="People"))
+
   def test_should_fails(self):
     with self.assertRaises(AssertionError):
       self.subject.should(have_selector, 'audio')
 
+  def test_should_fails_with_text_kwarg(self):
+    with self.assertRaises(AssertionError):
+      self.subject.should(have_selector, 'h1', text='Dogs')
+
   def test_should_not_passes(self):
     self.assertTrue(self.subject.should_not(have_selector, 'audio'))
+
+  def test_should_not_passes_with_text_kwarg(self):
+    self.assertTrue(self.subject.should_not(have_selector, 'h1', text='Dogs'))
 
   def test_should_not_fails(self):
     with self.assertRaises(AssertionError):
       self.subject.should_not(have_selector, 'h1')
+
+  def test_should_not_fails_with_text_kwarg(self):
+    with self.assertRaises(AssertionError):
+      self.subject.should_not(have_selector, 'h1', text='People')
