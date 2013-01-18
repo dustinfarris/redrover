@@ -1,7 +1,7 @@
 from urlparse import urlparse
 
 from splinter.exceptions import ElementDoesNotExist
-
+from zope.testbrowser.browser import Browser as ZopeTestBrowser
 from utils import get_url
 
 
@@ -84,7 +84,11 @@ def _subject(instance, parent_name=None, modifier=None):
     def value(self):
       if parent_name:
         parent = getattr(instance, parent_name)
-        _value = getattr(parent, self.name)
+        if self.name == 'path':
+          if isinstance(getattr(parent, BROWSER, None), ZopeTestBrowser):
+            _value = urlparse(parent.url).path
+        else:
+          _value = getattr(parent, self.name)
       else:
         _value = getattr(instance, self.name)
       if modifier:

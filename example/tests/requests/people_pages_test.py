@@ -28,6 +28,7 @@ class NewPersonPage(RedRoverLiveTest):
   def the_new_person_page(self):
     it.should(have_selector, 'h1', text='New Person')
     its('title').should(be, 'New Person')
+    its('path').should(be, '/people/new/')
 
 
 class NewPersonAction(RedRoverLiveTest):
