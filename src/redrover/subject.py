@@ -1,3 +1,4 @@
+from httplib import InvalidURL
 from urlparse import urlparse
 
 from splinter.exceptions import ElementDoesNotExist
@@ -112,11 +113,15 @@ def _splinter_action(_action, _parent):
     control.value = [option]
 
   def visit(location, *args, **kwargs):
-    if location.startswith('http'):
-      return _browser.visit(location)
-    base_url = _parent.live_server_url
-    url = get_url(location, *args, **kwargs)
-    return _browser.visit('%s%s' % (base_url, url))
+    try:
+      if location.startswith('http'):
+        return _browser.visit(location)
+      base_url = _parent.live_server_url
+      url = get_url(location, *args, **kwargs)
+      return _browser.visit('%s%s' % (base_url, url))
+    except:
+      raise InvalidURL(
+        'Could not determine a reliable URL from "%s"' % location)
 
   def click_link(*args, **kwargs):
     control = _browser._browser.getLink(*args, **kwargs)
