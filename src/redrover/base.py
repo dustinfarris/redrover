@@ -105,3 +105,9 @@ class RedRoverHelper(object):
     if exc_type:
       return False
     return self.exit()
+
+  def entry(self):
+    pass
+
+  def exit(self):
+    pass
