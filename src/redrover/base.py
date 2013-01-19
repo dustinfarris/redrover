@@ -91,11 +91,10 @@ class RedRoverLiveTest(LiveServerTestCase):
 class RedRoverHelper(object):
 
   def __init__(self, parent):
-    self.subject = parent.subject
+    for i in dir(parent):
+      if not i.startswith('__'):
+        setattr(self, i, getattr(parent, i))
     if self.subject == BROWSER:
-      setattr(self, BROWSER, getattr(parent, BROWSER))
-      setattr(
-        self, 'live_server_url', getattr(parent, 'live_server_url', None))
       self.entry.__globals__.update(get_splinter_actions(parent))
       self.exit.__globals__.update(get_splinter_actions(parent))
 
