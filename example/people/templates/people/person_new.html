@@ -8,6 +8,6 @@
 <form action="{% url "people:new" %}" method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Submit</button>
+  <button type="submit" name="submit">Submit</button>
 </form>
 {% endblock content %}

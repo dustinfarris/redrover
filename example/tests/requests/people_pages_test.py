@@ -41,5 +41,16 @@ class NewPersonAction(RedRoverLiveTest):
 
   @describe
   def with_invalid_information(self):
-    with expect.not_to(change, Person.objects.count, by=1):
-      click_button('Submit')
+    with expect.not_to(change, Person.objects.count):
+      click_on('Submit')
+    it.should(have_text, "This field is required.")
+
+  @describe
+  def with_valid_information(self):
+    with expect.to(change, Person.objects.count, by=1):
+      fill_in("First name:", "Dustin")
+      fill_in("Last name:", "Farris")
+      fill_in("Age:", "28")
+      select("Gender:", "M")
+      click_on("Submit")
+

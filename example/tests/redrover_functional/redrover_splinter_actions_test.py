@@ -31,7 +31,15 @@ class RedRoverSplinterActionsTest(RedRoverLiveTest):
 
   @describe
   def when_i_click_on_a_link(self):
-    # Tests `click_on` and `have_selector`
+    # Tests `click_link` and `have_selector`
     click_link('people')
     its('title').should(be, 'People')
     it.should(have_selector, 'h1', text='People')
+
+  @describe
+  def when_i_fill_in_a_form(self):
+    visit('/people/new/')
+    fill_in("First name:", "Dustin")
+    fill_in("Last name:", "Farris")
+    fill_in("Age:", "28")
+    click_on("Submit")
