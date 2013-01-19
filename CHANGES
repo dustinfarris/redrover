@@ -1,3 +1,15 @@
+Version 0.7.4
+-------------
+
+* Better exception handling
+* Moved finders to separate splinter functions
+* Added click_on action
+* Added fill_in action
+* Added select action
+* Added RedRoverHelper
+* Bug fixes
+
+
 Version 0.7.3
 -------------
 
