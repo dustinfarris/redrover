@@ -7,15 +7,16 @@ from assertions import BeExactlyAssertion as be_exactly, \
 
 from expectations import ChangeExpectation as change
 
-from base import RedRoverLiveTest, RedRoverTest, before, describe
+from base import RedRoverHelper, RedRoverLiveTest, RedRoverTest, before, \
+  describe
 from expect import Expect as expect
 from runner import RedRoverRunner
 from subject import BROWSER as page
 
 
 __all__ = [
-  'RedRoverRunner', 'RedRoverLiveTest', 'RedRoverTest', 'before', 'describe',
-  'expect', 'page',
+  'RedRoverHelper', 'RedRoverLiveTest', 'RedRoverRunner', 'RedRoverTest',
+  'before', 'describe', 'expect', 'page',
 
   # RedRover assertions
   'be', 'be_exactly', 'be_valid', 'contain', 'equal', 'have_selector',

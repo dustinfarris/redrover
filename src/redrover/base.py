@@ -86,3 +86,21 @@ class RedRoverLiveTest(LiveServerTestCase):
     super(RedRoverLiveTest, self).__init__(*args, **kwargs)
 
   __metaclass__ = _redrover_klass()
+
+
+class RedRoverHelper(object):
+
+  def __init__(self, parent):
+    self.subject = parent.subject
+    if self.subject == BROWSER:
+      setattr(self, BROWSER, getattr(parent, BROWSER))
+      setattr(
+        self, 'live_server_url', getattr(parent, 'live_server_url', None))
+      self.entry.__globals__.update(get_splinter_actions(parent))
+      self.exit.__globals__.update(get_splinter_actions(parent))
+
+  def __enter__(self):
+    return self.entry()
+
+  def __exit__(self, type, value, traceback):
+    return self.exit()
