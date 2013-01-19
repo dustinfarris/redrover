@@ -15,6 +15,7 @@ def _expectation(_expected_outcome, _action_class, *_args, **_kwargs):
     def __exit__(self, type, value, traceback):
       if self.action.exit() != _expected_outcome:
         raise ExpectationError(self.action.message)
+        return False
       return True
 
   return Expectation(_action_class, *_args, **_kwargs)
