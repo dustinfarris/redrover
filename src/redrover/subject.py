@@ -25,7 +25,7 @@ def _splinter_action(_action, _parent):
     # Grab all buttons
     buttons = _browser.find_by_tag('button')
     # First try to find the right one matching text
-    matching_text = filter(lambda e: e.text == query, buttons)
+    matching_text = filter(lambda e: e.text.strip() == query, buttons)
     if matching_text:
       return matching_text[0]
     # Try by CSS selector
@@ -45,6 +45,9 @@ def _splinter_action(_action, _parent):
     raise ElementNotFound('Could not find a link matching "%s"' % query)
 
   def find_input(query):
+    #
+    # NO LONGER USED
+    #
     # Try by label text first
     labels = _browser.find_by_tag('label')
     matching_text = filter(lambda e: e.text == query, labels)
@@ -72,8 +75,19 @@ def _splinter_action(_action, _parent):
   # Actions
 
   def fill_in(query, value):
-    input_field = find_input(query)
-    input_field.fill(value)
+    try:
+      control = _browser._browser.getControl(query)
+    except LookupError:
+      try:
+        control = _browser._browser.getControl(name=query)
+      except LookupError:
+        control = None
+
+    if control:
+      control.value = value
+    else:
+      input_field = find_input(query)
+      input_field.fill(value)
 
   def click_on(query):
     try:
@@ -104,8 +118,9 @@ def _splinter_action(_action, _parent):
     url = get_url(location, *args, **kwargs)
     return _browser.visit('%s%s' % (base_url, url))
 
-  def click_link(query):
-    return find_link(query).click()
+  def click_link(*args, **kwargs):
+    control = _browser._browser.getLink(*args, **kwargs)
+    return control.click()
 
   return locals().get(_action)
 
