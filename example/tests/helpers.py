@@ -8,6 +8,3 @@ class VisitThePeoplePage(RedRoverHelper):
 
   def exit(self):
     visit('people:index')
-
-
-
