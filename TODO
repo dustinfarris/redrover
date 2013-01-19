@@ -1,2 +1,3 @@
-Research appropriate cssselect requirement
+Ditch Splinter and just use zope.testbrowser
+Better handling for LinkNotFoundError
 Update documentation for expecation classes
