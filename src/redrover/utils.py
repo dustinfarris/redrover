@@ -6,9 +6,12 @@ def get_url(obj, *args, **kwargs):
   """Try to infer a URL from an ambiguous object."""
   if isinstance(obj, DjangoModel):
     return obj.get_absolute_url()
+  obj = str(obj)
+  if obj.startswith('http'):
+    return obj
   try:
     return reverse(obj, *args, **kwargs)
   except NoReverseMatch:
-    return str(obj)
+    return obj
   except:
-    raise RuntimeError("Could not infer a url from object %s." % repr(obj))
+    raise

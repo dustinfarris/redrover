@@ -114,11 +114,11 @@ def _splinter_action(_action, _parent):
 
   def visit(location, *args, **kwargs):
     try:
-      if location.startswith('http'):
-        return _browser.visit(location)
-      base_url = _parent.live_server_url
       url = get_url(location, *args, **kwargs)
-      return _browser.visit('%s%s' % (base_url, url))
+      if url.startswith('/'):
+        base_url = _parent.live_server_url
+        return _browser.visit('%s%s' % (base_url, url))
+      return _browser.visit(location)
     except:
       raise InvalidURL(
         'Could not determine a reliable URL from "%s"' % location)
