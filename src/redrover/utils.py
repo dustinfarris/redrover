@@ -13,5 +13,5 @@ def get_url(obj, *args, **kwargs):
     return reverse(obj, *args, **kwargs)
   except NoReverseMatch:
     return obj
-  except:
-    raise
+  except Exception, msg:
+    raise RuntimeError(msg)
