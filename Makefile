@@ -18,5 +18,5 @@ lint: lint-python
 
 lint-python:
 	@echo "Linting Python files"
-	flake8 --ignore=E111,E121,W404 src/redrover tests || exit 1
+	flake8 --ignore=W404 src/redrover tests || exit 1
 	@echo ""

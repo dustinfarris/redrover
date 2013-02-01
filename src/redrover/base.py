@@ -8,46 +8,46 @@ from subject import get_splinter_actions, _subject, BROWSER
 
 
 def _get_extra_context(instance, extra_context={}):
-  subject_name = getattr(instance, 'subject', None)
+    subject_name = getattr(instance, 'subject', None)
 
-  if subject_name:
-    extra_context = {
-      'it': _subject(instance)(subject_name),
-      'its': _subject(instance, parent_name=subject_name)}
+    if subject_name:
+        extra_context = {
+            'it': _subject(instance)(subject_name),
+            'its': _subject(instance, parent_name=subject_name)}
 
-    if subject_name == BROWSER:
-      extra_context.update(get_splinter_actions(instance))
+        if subject_name == BROWSER:
+            extra_context.update(get_splinter_actions(instance))
 
-  return extra_context
+    return extra_context
 
 
 def before(func):
-  """
-  The only way to get `setUp` to behave the way we want is to decorate
-  it.  So might as well make it look intentional :)
+    """
+    The only way to get `setUp` to behave the way we want is to
+    decorate it. So might as well make it look intentional :)
 
-  """
-  @functools.wraps(func)
-  def setUp(instance, *args, **kwargs):
-    func.__globals__.update(_get_extra_context(instance))
-    return func(instance, *args, **kwargs)
+    """
+    @functools.wraps(func)
+    def setUp(instance, *args, **kwargs):
+        func.__globals__.update(_get_extra_context(instance))
+        return func(instance, *args, **kwargs)
 
-  return setUp
+    return setUp
 
 
 def describe(func):
-  """
-  This more or less is the "magic" of RedRover.  With the `describe`
-  decorator, a test is equipped with the keywords 'it', 'its', and
-  if applicable, 'visit'.
+    """
+    This more or less is the "magic" of RedRover.  With the `describe`
+    decorator, a test is equipped with the keywords 'it', 'its', and
+    if applicable, 'visit'.
 
-  """
-  @functools.wraps(func)
-  def test_func(instance, *args, **kwargs):
-    func.__globals__.update(_get_extra_context(instance))
-    return func(instance, *args, **kwargs)
+    """
+    @functools.wraps(func)
+    def test_func(instance, *args, **kwargs):
+        func.__globals__.update(_get_extra_context(instance))
+        return func(instance, *args, **kwargs)
 
-  return test_func
+    return test_func
 
 
 def _is_protected(item):
@@ -56,58 +56,59 @@ def _is_protected(item):
 
 
 def _redrover_klass():
-  """
-  Prefix test methods with 'test_' so they are discoverable by the
-  test runner.
+    """
+    Prefix test methods with 'test_' so they are discoverable by the
+    test runner.
 
-  """
-  class DiscoverableTests(type):
+    """
+    class DiscoverableTests(type):
 
-    def __new__(cls, name, bases, dct):
-      for attr, value in dct.iteritems():
-        if not _is_protected(attr) and isinstance(value, FunctionType):
-          value.__name__ = 'test_%s' % value.__name__
-      return super(DiscoverableTests, cls).__new__(cls, name, bases, dct)
+        def __new__(cls, name, bases, dct):
+            for attr, value in dct.iteritems():
+                if not _is_protected(attr) and isinstance(value, FunctionType):
+                    value.__name__ = 'test_%s' % value.__name__
+            return super(
+                DiscoverableTests, cls).__new__(cls, name, bases, dct)
 
-  return DiscoverableTests
+    return DiscoverableTests
 
 
 class RedRoverTest(TestCase):
 
-  __metaclass__ = _redrover_klass()
+    __metaclass__ = _redrover_klass()
 
 
 class RedRoverLiveTest(LiveServerTestCase):
 
-  def __init__(self, *args, **kwargs):
-    if getattr(self, 'subject', None) == BROWSER:
-      setattr(self, BROWSER, splinter.Browser('zope.testbrowser'))
-      self.setUp.__globals__.update(get_splinter_actions(self))
-    super(RedRoverLiveTest, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        if getattr(self, 'subject', None) == BROWSER:
+            setattr(self, BROWSER, splinter.Browser('zope.testbrowser'))
+            self.setUp.__globals__.update(get_splinter_actions(self))
+        super(RedRoverLiveTest, self).__init__(*args, **kwargs)
 
-  __metaclass__ = _redrover_klass()
+    __metaclass__ = _redrover_klass()
 
 
 class RedRoverHelper(object):
 
-  def __init__(self, parent):
-    for i in dir(parent):
-      if not i.startswith('__'):
-        setattr(self, i, getattr(parent, i))
-    if self.subject == BROWSER:
-      self.entry.__globals__.update(get_splinter_actions(parent))
-      self.exit.__globals__.update(get_splinter_actions(parent))
+    def __init__(self, parent):
+        for i in dir(parent):
+            if not i.startswith('__'):
+                setattr(self, i, getattr(parent, i))
+        if self.subject == BROWSER:
+            self.entry.__globals__.update(get_splinter_actions(parent))
+            self.exit.__globals__.update(get_splinter_actions(parent))
 
-  def __enter__(self):
-    return self.entry()
+    def __enter__(self):
+        return self.entry()
 
-  def __exit__(self, exc_type, exc_value, traceback):
-    if exc_type:
-      return False
-    return self.exit()
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_type:
+            return False
+        return self.exit()
 
-  def entry(self):
-    pass
+    def entry(self):
+        pass
 
-  def exit(self):
-    pass
+    def exit(self):
+        pass

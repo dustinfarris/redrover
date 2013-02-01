@@ -5,5 +5,5 @@ from models import Person
 
 class PersonForm(forms.ModelForm):
 
-  class Meta:
-    model = Person
+    class Meta:
+        model = Person
