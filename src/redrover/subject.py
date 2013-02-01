@@ -78,7 +78,7 @@ def _splinter_action(_action, _parent):
 
     def fill_in(query, value):
         try:
-            control = _browser._browser.getControl(query)
+            control = _browser._browser.getControl(query, index=0)
         except LookupError:
             try:
                 control = _browser._browser.getControl(name=query)

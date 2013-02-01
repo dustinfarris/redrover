@@ -39,7 +39,7 @@ class RedRoverSplinterActionsTest(RedRoverLiveTest):
     @describe
     def when_i_fill_in_a_form(self):
         visit('/people/new/')
-        fill_in("First name:", "Dustin")
+        fill_in("name", "Dustin")
         fill_in("Last name:", "Farris")
         fill_in("Age:", "28")
         click_on("Submit")
