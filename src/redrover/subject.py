@@ -1,4 +1,5 @@
 from httplib import InvalidURL
+from urllib2 import HTTPError
 from urlparse import urlparse
 
 from splinter.exceptions import ElementDoesNotExist
@@ -119,6 +120,8 @@ def _splinter_action(_action, _parent):
                 base_url = _parent.live_server_url
                 return _browser.visit('%s%s' % (base_url, url))
             return _browser.visit(location)
+        except HTTPError:
+            raise
         except:
             raise InvalidURL(
                 'Could not determine a reliable URL from "%s"' % location)
