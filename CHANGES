@@ -1,3 +1,10 @@
+Version 0.7.4.2
+---------------
+
+- [Fix] Use the first item retrieved on Zope label lookups
+- Code improvements
+
+
 Version 0.7.4.1
 ---------------
 
