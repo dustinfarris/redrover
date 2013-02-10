@@ -17,8 +17,6 @@ class HaveTextAssertion(BaseAssertion):
         self.url = urlparse(browser.url).path
         self.text = text
         self.passes = smart_text(text) in smart_text(browser.html)
-        import ipdb
-        ipdb.set_trace()
 
     @property
     def message(self):
