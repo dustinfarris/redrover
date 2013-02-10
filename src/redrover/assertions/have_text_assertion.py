@@ -1,5 +1,7 @@
 from urlparse import urlparse
 
+from django.utils.encoding import smart_text
+
 from base import BaseAssertion
 
 
@@ -14,7 +16,9 @@ class HaveTextAssertion(BaseAssertion):
                 '`have_text` must be called on a page/Browser instance.')
         self.url = urlparse(browser.url).path
         self.text = text
-        self.passes = text in browser.html
+        self.passes = smart_text(text) in smart_text(browser.html)
+        import ipdb
+        ipdb.set_trace()
 
     @property
     def message(self):
