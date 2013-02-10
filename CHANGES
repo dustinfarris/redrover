@@ -1,3 +1,9 @@
+Version 0.7.4.5
+---------------
+
+- [Fix] Removed ipdb debugger from HaveTextAssertion
+
+
 Version 0.7.4.4
 ---------------
 
