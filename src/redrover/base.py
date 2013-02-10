@@ -104,7 +104,7 @@ class RedRoverHelper(object):
 
     def __exit__(self, exc_type, exc_value, traceback):
         if exc_type:
-            return False
+            raise exc_type(exc_value)
         return self.exit()
 
     def entry(self):

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import unittest
 
 import pytest
@@ -9,6 +11,9 @@ class GetUrlTest(unittest.TestCase):
 
     def test_url_from_string(self):
         self.assertEqual('/people/', get_url('/people/'))
+
+    def test_url_from_string_with_special_characters(self):
+        self.assertEqual('/ti%C3%ABsto/', get_url(u'/tiësto/'))
 
     @pytest.mark.django_db
     def test_url_from_model_instance(self):
