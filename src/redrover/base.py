@@ -1,7 +1,7 @@
 import functools
 from types import FunctionType
 
-from django.test import LiveServerTestCase, TestCase
+from django.test import LiveServerTestCase, TransactionTestCase
 import splinter
 
 from subject import get_splinter_actions, _subject, BROWSER
@@ -73,7 +73,7 @@ def _redrover_klass():
     return DiscoverableTests
 
 
-class RedRoverTest(TestCase):
+class RedRoverTest(TransactionTestCase):
 
     __metaclass__ = _redrover_klass()
 
