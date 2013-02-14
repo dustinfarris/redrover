@@ -48,7 +48,7 @@ dependency_links = [
 
 setup(
   name='redrover',
-  version='0.7.5',
+  version='0.7.6',
   author='Dustin Farris',
   author_email='dustin@dustinfarris.com',
   url='https://github.com/dustinfarris/redrover',

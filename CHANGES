@@ -1,3 +1,9 @@
+Version 0.7.6
+-------------
+
+- Bad idea, don't use TransactionTestCase by default
+
+
 Version 0.7.5
 -------------
 
