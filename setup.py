@@ -38,7 +38,7 @@ tests_require = [
 install_requires = [
   'Django>=1.4',
   'django-nose==commit.7fd013209',
-  'rednose==0.3.3',
+  'rednose>=0.3',
   'cssselect==0.7.1',
   'splinter',
   'zope.testbrowser']
