@@ -1,7 +1,7 @@
 class BaseAssertion(object):
-  passes = None
+    passes = None
 
-  @property
-  def message(self):
-    """Should be implemented by child classes."""
-    raise NotImplementedError
+    @property
+    def message(self):
+        """Should be implemented by child classes."""
+        raise NotImplementedError

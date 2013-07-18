@@ -1,7 +1,45 @@
-Version 0.7.5
+Version 0.7.7
 -------------
 
 * Lowered rednose version (PyPI seems to think 0.3.3 no longer exists)
+
+
+Version 0.7.6
+-------------
+
+- Bad idea, don't use TransactionTestCase by default
+
+
+Version 0.7.5
+-------------
+
+- Use TransactionTestCase by default
+
+
+Version 0.7.4.5
+---------------
+
+- [Fix] Removed ipdb debugger from HaveTextAssertion
+
+
+Version 0.7.4.4
+---------------
+
+- Handle special characters when performing the HaveText assertion
+
+
+Version 0.7.4.3
+---------------
+
+- Handle special characters when attempting to resolve URLs
+
+
+Version 0.7.4.2
+---------------
+
+- [Fix] Use the first item retrieved on Zope label lookups
+- Code improvements
+>>>>>>> 7df57e2a888514c963a0873f122c11011f1a54e2
 
 
 Version 0.7.4.1

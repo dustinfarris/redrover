@@ -17,34 +17,34 @@ from redrover import *
 
 class RedRoverBasicAssertions(RedRoverTest):
 
-  subject = 'cities'
+    subject = 'cities'
 
-  def setUp(self):
-    self.cities = ['New York', 'Springfield', 'Orlando']
+    def setUp(self):
+        self.cities = ['New York', 'Springfield', 'Orlando']
 
-  @describe
-  def when_equal(self):
-    it.should(equal, ['New York', 'Springfield', 'Orlando'])
+    @describe
+    def when_equal(self):
+        it.should(equal, ['New York', 'Springfield', 'Orlando'])
 
-  @describe
-  def when_not_equal(self):
-    it.should_not(equal, ['Springfield', 'Orlando', 'New York'])
+    @describe
+    def when_not_equal(self):
+        it.should_not(equal, ['Springfield', 'Orlando', 'New York'])
 
-  @describe
-  def when_is(self):
-    x = self.cities
-    it.should(be_exactly, x)
+    @describe
+    def when_is(self):
+        x = self.cities
+        it.should(be_exactly, x)
 
-  @describe
-  def when_is_not(self):
-    """
-    This fails because the two objects are at different locations in
-    memory -- which passes the test ala "should_not".
+    @describe
+    def when_is_not(self):
+        """
+        This fails because the two objects are at different locations in
+        memory -- which passes the test ala "should_not".
 
-    """
-    it.should_not(be_exactly, ['New York', 'Springfield', 'Orlando'])
+        """
+        it.should_not(be_exactly, ['New York', 'Springfield', 'Orlando'])
 
-  @describe
-  def when_contains(self):
-    it.should(contain, 'Springfield')
-    it.should_not(contain, 'Los Angeles')
+    @describe
+    def when_contains(self):
+        it.should(contain, 'Springfield')
+        it.should_not(contain, 'Los Angeles')

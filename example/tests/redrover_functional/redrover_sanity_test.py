@@ -17,5 +17,5 @@ from redrover import *
 
 class RedRoverSanityTest(RedRoverTest):
 
-  def test_assertion(self):
-    self.assertEquals(2, 1 + 1)
+    def test_assertion(self):
+        self.assertEquals(2, 1 + 1)

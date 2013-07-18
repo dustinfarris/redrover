@@ -8,6 +8,6 @@ from respond_to_assertion import RespondToAssertion
 
 
 __all__ = [
-  'BeExactlyAssertion', 'BeValidAssertion', 'ContainAssertion',
-  'EqualAssertion', 'HaveSelectorAssertion', 'HaveTextAssertion',
-  'RespondToAssertion']
+    'BeExactlyAssertion', 'BeValidAssertion', 'ContainAssertion',
+    'EqualAssertion', 'HaveSelectorAssertion', 'HaveTextAssertion',
+    'RespondToAssertion']
