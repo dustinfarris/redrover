@@ -1,4 +1,4 @@
-Django==1.4.3
+Django==1.11.28
 factory_boy
 
 # RedRover
